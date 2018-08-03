@@ -168,7 +168,7 @@ class Diff
         if (count($matches) === 0) return array('');
         return $matches;
     }
-    public static function mb_strcspn($str, $delimiters, $start) {
+    public static function mb_strcspn($str, $delimiters, $start = 0) {
         $dels = self::splitToChars($delimiters);
         $min  = mb_strlen($str);
         foreach ($dels as $del) {
