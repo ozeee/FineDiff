@@ -18,6 +18,7 @@
 
 namespace cogpowered\FineDiff\Render;
 
+use cogpowered\FineDiff\Diff;
 use cogpowered\FineDiff\Parser\OpcodeInterface;
 
 class Html extends Renderer
@@ -30,7 +31,7 @@ class Html extends Renderer
 
             $deletion = mb_substr($from, $from_offset, $from_len);
 
-            if (strcspn($deletion, " \n\r") === 0) {
+            if (Diff::mb_strcspn($deletion, " \n\r") === 0) {
                 $deletion = str_replace(array("\n","\r"), array('\n','\r'), $deletion);
             }
 

@@ -161,4 +161,30 @@ class Diff
 
         return $this->renderer->process($from_text, $opcodes);
     }
+
+    private static function splitToChars($str) {
+        preg_match_all('/./us', $str, $matches);
+        $matches = $matches[0];
+        if (count($matches) === 0) return array('');
+        return $matches;
+    }
+    public static function mb_strcspn($str, $delimiters, $start) {
+        $dels = self::splitToChars($delimiters);
+        $min  = mb_strlen($str);
+        foreach ($dels as $del) {
+            $pos = mb_strpos($str, $del, $start);
+            if ($pos !== false && $pos < $min) $min = $pos;
+        }
+        return $min - $start;
+    }
+    public static function mb_strspn($str, $delimiters, $start) {
+        $str  = mb_substr($str, $start);
+        $dels = self::splitToChars($delimiters);
+        foreach ($dels as $idx => $del) {
+            $dels[$idx] = preg_quote($del, '/');
+        }
+        $dels = implode('|', $dels);
+        preg_match("/^($dels)+/us", $str, $match);
+        return $match ? mb_strlen($match[0]) : 0;
+    }
 }

@@ -18,6 +18,7 @@
 
 namespace cogpowered\FineDiff\Parser;
 
+use cogpowered\FineDiff\Diff;
 use cogpowered\FineDiff\Granularity\GranularityInterface;
 use cogpowered\FineDiff\Exceptions\GranularityCountException;
 use cogpowered\FineDiff\Parser\Operations\Copy;
@@ -459,8 +460,8 @@ class Parser implements ParserInterface
 
         for (;;) {
 
-            $end += strcspn($text, $delimiters, $end);
-            $end += strspn($text, $delimiters, $end);
+            $end += Diff::mb_strcspn($text, $delimiters, $end);
+            $end += Diff::mb_strspn($text, $delimiters, $end);
 
             if ($end === $start) {
                 break;

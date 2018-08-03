@@ -24,4 +24,5 @@
     "autoload": {
         "psr-0": { "cogpowered\\FineDiff": "src/" }
     }
+
 }
